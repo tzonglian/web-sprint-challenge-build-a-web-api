@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "db:seed": "knex seed:run",
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "server": "nodemon index.js",
-    "postInstall": "cd client && npm i && npm run build"
+    "postInstall": "npm i && npm run build"
   },
   "repository": {
     "type": "git",
