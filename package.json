@@ -4,10 +4,9 @@
   "description": "Node API Challenge",
   "main": "index.js",
   "scripts": {
-    "db:seed": "knex seed:run",
     "start": "node index.js",
-    "server": "nodemon index.js",
-    "postInstall": "npm i && npm run build"
+    "db:seed": "knex seed:run",
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
