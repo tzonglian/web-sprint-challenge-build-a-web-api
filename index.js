@@ -13,7 +13,10 @@ I need this code, but don't know where, perhaps should make some middleware, don
 Go code!
 */
 
+require("dotenv").config();
+
 const port = process.env.PORT || 3200;
+const secret = process.env.SECRET || "hush_secret";
 
 const server = require("./server.js");
 
