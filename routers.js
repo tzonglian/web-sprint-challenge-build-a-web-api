@@ -27,7 +27,7 @@ function validateProjectId(req, res, next) {
     });
 }
 
-// Validates Action's ID
+// Validates Action's ID - WORKS
 function validateActionId(req, res, next) {
   Actions.get(req.params.id)
     .then((data) => {
@@ -65,9 +65,9 @@ function validateActionBody(req, res, next) {
     res.status(400).json({
       message: "Missing action data",
     });
-  } else if (!req.body.project_id || !req.body.description || !req.body.notes) {
+  } else if (!req.body.description || !req.body.notes) {
     res.status(400).json({
-      message: "Missing required project_id, description and/or notes.",
+      message: "Missing required description and/or notes.",
     });
   } else {
     next();
@@ -122,7 +122,6 @@ router.post("/projects", validateProjectBody, (req, res, next) => {
 });
 
 // Post a new action for a project - WORKS
-// (bonus feature? don't need to specify project_id in action body)
 router.post(
   "/projects/:id/actions",
   validateActionBody,
@@ -148,7 +147,19 @@ router.put(
     });
   }
 );
-// Update an action for a project
+// Update an action - WORKS
+router.put(
+  "/actions/:id",
+  validateActionBody,
+  validateActionId,
+  (req, res, next) => {
+    Actions.update(req.params.id, req.body).then((updatedAction) =>
+      res.status(200).json({
+        updatedAction,
+      })
+    );
+  }
+);
 
 // DELETE
 // Delete a project - WORKS
@@ -160,6 +171,13 @@ router.delete("/projects/:id", validateProjectId, (req, res, next) => {
   );
 });
 
-// Delete an action for a project
+// Delete an action - WORKS
+router.delete("/actions/:id", validateActionId, (req, res, next) => {
+  Actions.remove(req.params.id).then((numDeleted) =>
+    res.status(200).json({
+      message: `Action deleted (number of deleted actions ${numDeleted})`,
+    })
+  );
+});
 
 module.exports = router;
