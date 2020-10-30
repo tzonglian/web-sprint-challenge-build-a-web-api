@@ -6,7 +6,8 @@
   "scripts": {
     "db:seed": "knex seed:run",
     "start": "nodemon index.js",
-    "server": "nodemon index.js"
+    "server": "nodemon index.js",
+    "postInstall": "cd client && npm i && npm run build"
   },
   "repository": {
     "type": "git",
